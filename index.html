@@ -65,13 +65,16 @@
             ticketsSold += tickets;
 
             // Store booking information
+
             Booking.push({ name, email, tickets });
 
             // Update the UI
+
             document.getElementById("seats-available").textContent = seatsAvailable;
             document.getElementById("tickets-sold").textContent = ticketsSold;
 
             // Check if tickets are sold out
+            
             if (seatsAvailable === 0) {
                 document.getElementById('sold-out-message').style.display = 'block';
                 document.querySelector('.inforBox').style.display='none';
