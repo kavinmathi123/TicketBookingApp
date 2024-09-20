@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles.css">
+    <script src="./script.js" defer></script>
     <title>Ticket Booking</title>
 </head>
 <body>
@@ -41,61 +42,5 @@
         </div>
         <p id="search-result"></p>
     </div>
-
-    <script>
-        let submitBtn = document.getElementById('submit-btn');
-        let searchBtn = document.getElementById('search-btn');
-        const inforBox = document.querySelector(".inforBox");
-        let Booking = [];
-
-        function handleClick() {
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            let tickets = parseInt(document.getElementById('tickets').value);
-
-            let seatsAvailable = parseInt(document.getElementById("seats-available").textContent);
-            let ticketsSold = parseInt(document.getElementById("tickets-sold").textContent);
-
-            if (tickets > seatsAvailable) {
-                alert("Not enough seats available!");
-                return;
-            }
-
-            seatsAvailable -= tickets;
-            ticketsSold += tickets;
-
-            // Store booking information
-
-            Booking.push({ name, email, tickets });
-
-            // Update the UI
-
-            document.getElementById("seats-available").textContent = seatsAvailable;
-            document.getElementById("tickets-sold").textContent = ticketsSold;
-
-            // Check if tickets are sold out
-            
-            if (seatsAvailable === 0) {
-                document.getElementById('sold-out-message').style.display = 'block';
-                document.querySelector('.inforBox').style.display='none';
-            }
-
-            console.log(Booking);
-        }
-
-        function handleSearch() {
-            const userEmail = document.getElementById('userEmail').value;
-            const userBooking = Booking.filter(b => b.email === userEmail);
-
-            const result = userBooking.length > 0 
-                ? `Name: ${userBooking[0].name}, Tickets Booked: ${userBooking[0].tickets}` 
-                : 'No booking found for this email';
-
-            document.getElementById('search-result').textContent = result;
-        }
-
-        submitBtn.addEventListener("click", handleClick);
-        searchBtn.addEventListener("click", handleSearch);
-    </script>
 </body>
 </html>
